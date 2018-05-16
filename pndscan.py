@@ -19,12 +19,12 @@ import smtplib
 import datetime
 import threading
 from mwt import MWT
-chatid = -1001227218211
+chatid = ""
 l = []
 d = {}
  
-CHANGE = -0.02 #the sign is inverse so a positive number here actually looks for a decrease by that amount
-CHANGEDOWN = 0.02
+CHANGE = -0.07 #the sign is inverse so a positive number here actually looks for a decrease by that amount
+CHANGEDOWN = 0.07
 MINBTCVOLUME = 30
 MARKET = "BTC-" #Can be ETH- LTC- etc.
 
@@ -85,8 +85,8 @@ def analizza(bot, update):
 							variazione = str(round(math.fabs(((old_price - new_price) / old_price)*100),4))
 							notifica = "PUMP IN ACTION!!\n +" + variazione + "%\n https://www.tradingview.com/chart/?symbol=BITTREX:" + mn.split("-")[1]+"BTC\n"	
 							#update.message.reply_text(notifica)
-							bot.send_message(chat_id="@dustcrp", text=notifica)
-							#bot.send_message(chat_id="@pndscanner", text=notifica)
+							bot.send_message(chat_id="@", text=notifica)
+							#bot.send_message(chat_id="@", text=notifica)
 							d[mn] = time.time()
 							break
 						if (old_price - new_price) / old_price  >= CHANGEDOWN:
@@ -102,14 +102,14 @@ def analizza(bot, update):
 							variazione = str(round(math.fabs(((old_price - new_price) / old_price)*100),4))
 							notifica = "DROP IN ACTION!!\n -" + variazione + "%\n https://www.tradingview.com/chart/?symbol=BITTREX:" + mn.split("-")[1]+"BTC\n"	
 							#update.message.reply_text(notifica)
-							bot.send_message(chat_id="@dustcrp", text=notifica)
-							#bot.send_message(chat_id="@pndscanner", text=notifica)
+							bot.send_message(chat_id="@", text=notifica)
+							#bot.send_message(chat_id="@", text=notifica)
 							d[mn] = time.time()
 							break
 			
 			else:
 				print("In errore... riavvio")
-				bot.send_message(chat_id='@dustcrp',text="Errore...riavvio..")
+				bot.send_message(chat_id='@',text="Errore...riavvio..")
 				time.sleep(15)
 				analizza(bot, update)
 		except:
@@ -141,8 +141,8 @@ def get_admin_ids(bot, chat_id):
 	
 
 	
-bot = telegram.Bot(token= '477611075:AAE2oiys-eTaMQNa95y37_QVzdi6h7pEZXg')
-updater = Updater("477611075:AAE2oiys-eTaMQNa95y37_QVzdi6h7pEZXg")
+bot = telegram.Bot(token= '')
+updater = Updater("")
 dp = updater.dispatcher
 dp.add_handler(CommandHandler('start',start))
 dp.add_handler(CommandHandler("help",help))
